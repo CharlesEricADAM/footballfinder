@@ -29,15 +29,12 @@ Install Devise:
 Then:
 ```ruby
 bundle install
-
 rails generate devise:install
 ```
-
 In config/environments/development.rb, put: 
 ```ruby
 config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 ```
-
 Must see this:
 ```ruby
 # Don't care if the mailer can't send.
@@ -46,7 +43,7 @@ Must see this:
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.perform_caching = false
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  ```
+```
 Follow instructions of the message in the terminal (flash, alerts, notices)
 
 Remove helpers and assets in `application.rb`:
@@ -55,12 +52,12 @@ Remove helpers and assets in `application.rb`:
     config.generators.assets = false
 ```
 
-# Create controller Home: rails g controller Home index secret
-# Create DB: rdbc
+2. Create controller Home: rails g controller Home index secret
+3. Create DB: rdbc
 ```ruby
 rails db:create
 ```
-# Set Active Storage to put an avatar on a user: 
+4. Set Active Storage to put an avatar on a user: 
 ```ruby
 rails active_storage:install
 ```
@@ -69,27 +66,26 @@ Launch migration:
 rails db:migrate
 ```
 
-# Create a model User: 
+5. Create a model User: 
 ```ruby
 rails g devise User firstname lastname
 ```
 In the migration file: uncheck the following:
 ```ruby
-		# Confirmable
-      		t.string   :confirmation_token
-      		t.datetime :confirmed_at
-      		t.datetime :confirmation_sent_at
-          t.string   :unconfirmed_email # Only if using reconfirmable
+# Confirmable
+t.string   :confirmation_token
+t.datetime :confirmed_at
+t.datetime :confirmation_sent_at
+t.string   :unconfirmed_email # Only if using reconfirmable
 ```
-
 Add ‘confirmable’ in user.rb file
 Add a constraint in DB (add ‘null: false’ behind first name and lastname) to get this:
 
 ```ruby
-=> t.string :firstname           null: false
-      t.string :lastname            null: false
-      t.string :email,              null: false, default: ""
-      t.string :encrypted_password, null: false, default: ""
+t.string :firstname           null: false
+t.string :lastname            null: false
+t.string :email,              null: false, default: ""
+t.string :encrypted_password, null: false, default: ""
 ```
 Launch migration: 
 ```ruby
